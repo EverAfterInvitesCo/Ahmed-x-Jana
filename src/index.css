@@ -14,7 +14,7 @@
   body {
     font-family: var(--font-serif-luxury);
     background-color: #faf5ee;
-    background-image: url('/bg.jfif');
+    background-image: url('/bg.png');
     background-size: cover;
     background-position: center top;
     background-attachment: fixed;
@@ -101,4 +101,4 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-} 
+}
