@@ -28,9 +28,9 @@ export const HeroDovesSection: React.FC = () => {
   return (
     <section
       id="hero-doves-section"
-      className="relative min-h-[92vh] w-full flex flex-col items-center justify-between pt-12 sm:pt-16 pb-8 px-4 text-center overflow-hidden bg-[#faf8f5]"
+      className="relative min-h-[92vh] w-full flex flex-col items-center justify-between pt-12 sm:pt-16 pb-8 px-4 text-center overflow-hidden bg-black"
     >
-      {/* Background Video */}
+      {/* Background Video - Increased opacity for clear visibility */}
       <video
         ref={videoRef}
         src={MEDIA_ASSETS.dovesVideo}
@@ -39,11 +39,11 @@ export const HeroDovesSection: React.FC = () => {
         autoPlay
         loop
         preload="auto"
-        className="absolute inset-0 w-full h-full object-cover z-0 opacity-30 pointer-events-none"
+        className="absolute inset-0 w-full h-full object-cover z-0 opacity-70 pointer-events-none"
       />
 
-      {/* Subtle overlay gradient for better text readability */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#faf8f5]/60 via-[#faf8f5]/40 to-[#faf8f5]/60 z-0 pointer-events-none" />
+      {/* Lighter, subtle dark overlay so the white/gold text stands out sharply against the video */}
+      <div className="absolute inset-0 bg-black/40 z-0 pointer-events-none" />
 
       {/* Top Monogram Seal */}
       <motion.div
@@ -52,8 +52,8 @@ export const HeroDovesSection: React.FC = () => {
         transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
         className="flex flex-col items-center z-10"
       >
-        <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full border border-[#8a6514]/40 bg-white/80 backdrop-blur-sm flex items-center justify-center shadow-[0_4px_20px_rgba(138,101,20,0.12)]">
-          <span className="font-royal text-base sm:text-lg font-bold text-[#6b4e18] tracking-widest">
+        <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full border border-[#f3e5ab]/60 bg-black/40 backdrop-blur-md flex items-center justify-center shadow-[0_4px_20px_rgba(0,0,0,0.4)]">
+          <span className="font-royal text-base sm:text-lg font-bold text-[#f3e5ab] tracking-widest">
             A & J
           </span>
         </div>
@@ -69,32 +69,32 @@ export const HeroDovesSection: React.FC = () => {
         >
           {/* Upper Title */}
           <div className="flex items-center gap-2 mb-3">
-            <div className="h-[1px] w-8 sm:w-16 bg-gradient-to-r from-transparent to-[#8a6514]" />
-            <Sparkles className="w-3.5 h-3.5 text-[#8a6514]" />
-            <span className="font-royal text-[11px] sm:text-xs uppercase tracking-[0.4em] text-[#7a581a] font-bold">
+            <div className="h-[1px] w-8 sm:w-16 bg-gradient-to-r from-transparent to-[#f3e5ab]" />
+            <Sparkles className="w-3.5 h-3.5 text-[#f3e5ab]" />
+            <span className="font-royal text-[11px] sm:text-xs uppercase tracking-[0.4em] text-[#f3e5ab] font-bold">
               The Royal Wedding
             </span>
-            <Sparkles className="w-3.5 h-3.5 text-[#8a6514]" />
-            <div className="h-[1px] w-8 sm:w-16 bg-gradient-to-l from-transparent to-[#8a6514]" />
+            <Sparkles className="w-3.5 h-3.5 text-[#f3e5ab]" />
+            <div className="h-[1px] w-8 sm:w-16 bg-gradient-to-l from-transparent to-[#f3e5ab]" />
           </div>
 
           {/* Arabic Names */}
-          <p className="font-arabic text-3xl sm:text-4xl md:text-5xl text-[#6b4e18] font-bold leading-relaxed mb-2 drop-shadow-[0_1px_3px_rgba(255,255,255,0.8)]">
+          <p className="font-arabic text-3xl sm:text-4xl md:text-5xl text-[#fef0cd] font-bold leading-relaxed mb-2 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
             أحمد حسام & جنى محمد
           </p>
 
           {/* English Names */}
-          <h1 className="font-royal text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#2c1d0f] font-semibold tracking-wide drop-shadow-[0_1px_4px_rgba(255,255,255,0.9)] mb-3">
-            Ahmed Hossam <span className="font-serif-luxury italic font-light text-[#8a6514] text-2xl sm:text-3xl md:text-4xl">&</span> Jana Mohamed
+          <h1 className="font-royal text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white font-semibold tracking-wide drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)] mb-3">
+            Ahmed Hossam <span className="font-serif-luxury italic font-light text-[#f3e5ab] text-2xl sm:text-3xl md:text-4xl">&</span> Jana Mohamed
           </h1>
 
           {/* Invitation Statement */}
-          <p className="font-serif-luxury italic text-base sm:text-lg text-[#543b22] max-w-lg mb-4 leading-relaxed">
+          <p className="font-serif-luxury italic text-base sm:text-lg text-[#f3efe6] max-w-lg mb-4 leading-relaxed drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)]">
             Together with their families, request the honour of your presence to celebrate their holy union
           </p>
 
           {/* Date & City Badge */}
-          <div className="px-5 py-2 rounded-full bg-white/75 backdrop-blur-md border border-[#8a6514]/30 text-[#3b2a1a] font-royal text-xs sm:text-sm font-bold tracking-widest shadow-[0_4px_16px_rgba(138,101,20,0.1)]">
+          <div className="px-5 py-2 rounded-full bg-black/50 backdrop-blur-md border border-[#f3e5ab]/50 text-[#fef0cd] font-royal text-xs sm:text-sm font-bold tracking-widest shadow-[0_4px_16px_rgba(0,0,0,0.5)]">
             Thursday, 21 January 2027 • Cairo, Egypt
           </div>
         </motion.div>
@@ -110,16 +110,16 @@ export const HeroDovesSection: React.FC = () => {
         <button
           onClick={scrollToNext}
           aria-label="Scroll to wedding invitation details"
-          className="flex flex-col items-center gap-1.5 text-[#7a581a] hover:text-[#2c1d0f] transition-colors duration-300 cursor-pointer"
+          className="flex flex-col items-center gap-1.5 text-[#f3e5ab] hover:text-white transition-colors duration-300 cursor-pointer"
         >
-          <span className="font-royal text-[10px] uppercase tracking-[0.3em] font-semibold">
+          <span className="font-royal text-[10px] uppercase tracking-[0.3em] font-semibold drop-shadow">
             Scroll To Read
           </span>
           <motion.div
             animate={{ y: [0, 5, 0] }}
             transition={{ repeat: Infinity, duration: 2.0, ease: 'easeInOut' }}
           >
-            <ChevronDown className="w-4 h-4 text-[#8a6514]" />
+            <ChevronDown className="w-4 h-4 text-[#f3e5ab]" />
           </motion.div>
         </button>
       </motion.div>
