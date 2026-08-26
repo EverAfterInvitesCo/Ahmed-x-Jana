@@ -28,10 +28,9 @@ export const HeroDovesSection: React.FC = () => {
   return (
     <section
       id="hero-doves-section"
-      // 1. Set section background to white
       className="relative min-h-[92vh] w-full flex flex-col items-center justify-between pt-12 sm:pt-16 pb-8 px-4 text-center overflow-hidden bg-white"
     >
-      {/* Background Video - Full Opacity, set to object-cover */}
+      {/* Background Video - Full Opacity */}
       <video
         ref={videoRef}
         src={MEDIA_ASSETS.dovesVideo}
@@ -43,10 +42,10 @@ export const HeroDovesSection: React.FC = () => {
         className="absolute inset-0 w-full h-full object-cover z-0 opacity-100 pointer-events-none"
       />
 
-      {/* 2. Blended Text Container - ADD THE CLASS BELOW */}
+      {/* Blended Text Container */}
       <div
         className="w-full max-w-2xl mx-auto text-center flex flex-col items-center my-auto z-10 px-4 py-6"
-        style={{ mixBlendMode: 'multiply' }} // This is the magic CSS line
+        style={{ mixBlendMode: 'multiply' }}
       >
         <motion.div
           initial={{ opacity: 0, scale: 0.96, y: 15 }}
@@ -54,7 +53,7 @@ export const HeroDovesSection: React.FC = () => {
           transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           className="flex flex-col items-center"
         >
-          {/* Upper Title - Change all text to black */}
+          {/* Upper Title */}
           <div className="flex items-center gap-2 mb-3">
             <div className="h-[1px] w-8 sm:w-16 bg-gradient-to-r from-transparent to-black" />
             <Sparkles className="w-3.5 h-3.5 text-black" />
@@ -65,35 +64,35 @@ export const HeroDovesSection: React.FC = () => {
             <div className="h-[1px] w-8 sm:w-16 bg-gradient-to-l from-transparent to-black" />
           </div>
 
-          {/* Arabic Names - Black Text */}
+          {/* Arabic Names with 'و' */}
           <p className="font-arabic text-3xl sm:text-4xl md:text-5xl text-black font-bold leading-relaxed mb-2">
-            أحمد حسام & جنى محمد
+            أحمد حسام و جنى محمد
           </p>
 
-          {/* English Names - Black Text */}
+          {/* English Names */}
           <h1 className="font-royal text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-black font-semibold tracking-wide mb-3">
             Ahmed Hossam <span className="font-serif-luxury italic font-light text-black text-2xl sm:text-3xl md:text-4xl">&</span> Jana Mohamed
           </h1>
 
-          {/* Invitation Statement - Black Text */}
+          {/* Invitation Statement */}
           <p className="font-serif-luxury italic text-base sm:text-lg text-black max-w-lg mb-4 leading-relaxed">
             Together with their families, request the honour of your presence to celebrate their holy union
           </p>
 
-          {/* Date & City Badge - Black Text */}
+          {/* Date & City Badge */}
           <div className="px-5 py-2 rounded-full bg-black/5 border border-black/10 text-black font-royal text-xs sm:text-sm font-bold tracking-widest">
             Thursday, 21 January 2027 • Cairo, Egypt
           </div>
         </motion.div>
       </div>
 
-      {/* Bottom Scroll Indicator - Black Text */}
+      {/* Bottom Scroll Indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1.2, delay: 0.8 }}
         className="flex flex-col items-center z-10"
-        style={{ mixBlendMode: 'multiply' }} // Blend the bottom text too
+        style={{ mixBlendMode: 'multiply' }}
       >
         <button
           onClick={scrollToNext}
