@@ -13,8 +13,10 @@
 
   body {
     font-family: var(--font-serif-luxury);
-    /* Set to transparent so the fixed video background flows through the whole site */
-    background-color: transparent;
+    background-image: url('/bg.jfif');
+    background-size: cover;
+    background-position: center top;
+    background-attachment: fixed;
     color: #2c1d0f;
     overflow-x: hidden;
   }
