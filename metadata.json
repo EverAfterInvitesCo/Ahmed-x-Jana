@@ -1,0 +1,6 @@
+{
+  "name": "Ahmed & Jana Wedding Invitation",
+  "description": "A luxurious and cinematic wedding invitation website for Ahmed Hossam & Jana Mohamed with enchanted long-scroll scenes, video transitions, Quranic Ayah, and interactive countdown.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,99 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-royal: 'Cinzel', serif;
+    --font-decorative: 'Cinzel Decorative', serif;
+    --font-serif-luxury: 'Cormorant Garamond', serif;
+    --font-script: 'Alex Brush', cursive;
+    --font-pinyon: 'Pinyon Script', cursive;
+    --font-arabic: 'Scheherazade New', 'Amiri', serif;
+    --font-sans-clean: 'Plus Jakarta Sans', sans-serif;
+  }
+
+  body {
+    font-family: var(--font-serif-luxury);
+    background-color: #faf5ee;
+    color: #2c1d0f;
+    overflow-x: hidden;
+  }
+}
+
+.font-royal {
+  font-family: 'Cinzel', serif;
+}
+
+.font-decorative {
+  font-family: 'Cinzel Decorative', serif;
+}
+
+.font-serif-luxury {
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.font-script {
+  font-family: 'Alex Brush', cursive;
+}
+
+.font-pinyon {
+  font-family: 'Pinyon Script', cursive;
+}
+
+.font-arabic {
+  font-family: 'Scheherazade New', 'Amiri', serif;
+}
+
+.font-sans-clean {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+/* Luxurious Gold Text Gradient for Bright Canvas */
+.text-gold-deep {
+  color: #7a581a;
+}
+
+.text-gold-gradient {
+  background: linear-gradient(135deg, #573a0e 0%, #8a6514 40%, #b38b37 70%, #573a0e 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Royal Glass for Bright Floral Canvas */
+.royal-glass-bright {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(138, 101, 20, 0.22);
+  box-shadow: 0 10px 30px rgba(110, 80, 20, 0.08);
+}
+
+.royal-glass-soft {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(138, 101, 20, 0.15);
+}
+
+/* Custom Scrollbar in Warm Ivory/Gold */
+::-webkit-scrollbar {
+  width: 7px;
+}
+::-webkit-scrollbar-track {
+  background: #faf5ee;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbb48b;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #9d7c43;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
