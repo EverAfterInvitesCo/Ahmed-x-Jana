@@ -13,7 +13,8 @@
 
   body {
     font-family: var(--font-serif-luxury);
-    background-color: #faf5ee;
+    /* Set to transparent so the fixed video background flows through the whole site */
+    background-color: transparent;
     color: #2c1d0f;
     overflow-x: hidden;
   }
