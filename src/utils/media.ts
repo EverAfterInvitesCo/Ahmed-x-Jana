@@ -15,5 +15,5 @@ export function getAssetUrl(fileName: string): string {
 export const MEDIA_ASSETS = {
   gatesVideo: getAssetUrl('gates.mp4'),
   dovesVideo: getAssetUrl('doves.mp4'),
-  backgroundImg: getAssetUrl('bg.jfif'),
+  backgroundImg: getAssetUrl('bg.png'),
 };
