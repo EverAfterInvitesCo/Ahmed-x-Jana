@@ -12,7 +12,7 @@ export const HeroDovesSection: React.FC = () => {
       const playPromise = video.play();
       if (playPromise !== undefined) {
         playPromise.catch(() => {
-          // Autoplay fallback
+          // Autoplay fallback handler
         });
       }
     }
@@ -28,8 +28,23 @@ export const HeroDovesSection: React.FC = () => {
   return (
     <section
       id="hero-doves-section"
-      className="relative min-h-[92vh] w-full flex flex-col items-center justify-between pt-12 sm:pt-16 pb-8 px-4 text-center bg-transparent"
+      className="relative min-h-[92vh] w-full flex flex-col items-center justify-between pt-12 sm:pt-16 pb-8 px-4 text-center overflow-hidden bg-[#faf8f5]"
     >
+      {/* Background Video */}
+      <video
+        ref={videoRef}
+        src={MEDIA_ASSETS.dovesVideo}
+        playsInline
+        muted
+        autoPlay
+        loop
+        preload="auto"
+        className="absolute inset-0 w-full h-full object-cover z-0 opacity-30 pointer-events-none"
+      />
+
+      {/* Subtle overlay gradient for better text readability */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#faf8f5]/60 via-[#faf8f5]/40 to-[#faf8f5]/60 z-0 pointer-events-none" />
+
       {/* Top Monogram Seal */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
@@ -81,21 +96,6 @@ export const HeroDovesSection: React.FC = () => {
           {/* Date & City Badge */}
           <div className="px-5 py-2 rounded-full bg-white/75 backdrop-blur-md border border-[#8a6514]/30 text-[#3b2a1a] font-royal text-xs sm:text-sm font-bold tracking-widest shadow-[0_4px_16px_rgba(138,101,20,0.1)]">
             Thursday, 21 January 2027 • Cairo, Egypt
-          </div>
-
-          {/* Video of Doves in an arched window */}
-          <div className="mt-8 relative w-48 sm:w-56 aspect-[4/3] rounded-t-full rounded-b-2xl overflow-hidden border border-[#8a6514]/40 shadow-[0_10px_30px_rgba(138,101,20,0.18)] bg-white/60">
-            <video
-              ref={videoRef}
-              src={MEDIA_ASSETS.dovesVideo}
-              playsInline
-              muted
-              autoPlay
-              loop
-              preload="auto"
-              className="w-full h-full object-cover object-center"
-            />
-            <div className="absolute inset-0 ring-1 ring-inset ring-[#8a6514]/30 rounded-t-full rounded-b-2xl pointer-events-none" />
           </div>
         </motion.div>
       </div>
