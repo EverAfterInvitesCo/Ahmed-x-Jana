@@ -27,13 +27,13 @@ export default function App() {
   return (
     <div className="relative min-h-screen bg-[#faf5ee] text-[#2c1d0f] selection:bg-[#8a6514]/25 selection:text-[#2c1d0f] overflow-x-hidden font-serif-luxury">
       {/* 
-        Sole Continuous Background: bg.jfif
+        Sole Continuous Background: bg.png
         Fixed across the entire viewport to guarantee a seamless, non-choppy, bright floral scroll experience.
       */}
       <div
         className="fixed inset-0 pointer-events-none -z-20 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: `url('/bg.jfif')`,
+          backgroundImage: `url('/bg.png')`,
           backgroundColor: '#faf5ee',
         }}
       />
