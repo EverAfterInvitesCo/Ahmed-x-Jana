@@ -11,7 +11,6 @@ import { WeddingFooter } from './components/WeddingFooter';
 import { FallingLeavesCanvas } from './components/FallingLeavesCanvas';
 import { AudioPlayer } from './components/AudioPlayer';
 import { BookOpen, Clock, CalendarDays, Heart, MessageSquare } from 'lucide-react';
-import { MEDIA_ASSETS } from './utils/media';
 
 export default function App() {
   const [hasEntered, setHasEntered] = useState<boolean>(false);
@@ -30,13 +29,13 @@ export default function App() {
   return (
     <div className="relative min-h-screen bg-[#faf5ee] text-[#2c1d0f] selection:bg-[#8a6514]/25 selection:text-[#2c1d0f] overflow-x-hidden font-serif-luxury">
       {/* 
-        Sole Continuous Background: background.png
+        Sole Continuous Background: bg.jfif
         Fixed across the entire viewport to guarantee a seamless, non-choppy, bright floral scroll experience.
       */}
       <div
         className="fixed inset-0 pointer-events-none -z-20 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: `url(${MEDIA_ASSETS.backgroundImg})`,
+          backgroundImage: `url('/bg.jfif')`,
           backgroundColor: '#faf5ee',
         }}
       />
