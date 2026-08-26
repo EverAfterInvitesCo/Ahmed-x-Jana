@@ -4,13 +4,11 @@ import { OpeningGatesScreen } from './components/OpeningGatesScreen';
 import { HeroDovesSection } from './components/HeroDovesSection';
 import { QuranicAyahSection } from './components/QuranicAyahSection';
 import { CountdownSection } from './components/CountdownSection';
-import { CelebrationDetailsSection } from './components/CelebrationDetailsSection';
 import { RSVPSection } from './components/RSVPSection';
 import { WishesGuestbook } from './components/WishesGuestbook';
-import { WeddingFooter } from './components/WeddingFooter';
 import { FallingLeavesCanvas } from './components/FallingLeavesCanvas';
 import { AudioPlayer } from './components/AudioPlayer';
-import { BookOpen, Clock, CalendarDays, Heart, MessageSquare } from 'lucide-react';
+import { BookOpen, Clock, Heart, MessageSquare } from 'lucide-react';
 
 export default function App() {
   const [hasEntered, setHasEntered] = useState<boolean>(false);
@@ -62,7 +60,7 @@ export default function App() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1.2, ease: 'easeInOut' }}
-        className="relative w-full flex flex-col items-center z-10"
+        className="relative w-full flex flex-col items-center z-10 pb-20"
       >
         {/* 1. Hero Welcome & Royal Announcement */}
         <HeroDovesSection />
@@ -94,17 +92,7 @@ export default function App() {
           <div className="h-[1px] w-20 bg-gradient-to-l from-transparent to-[#8a6514]/40" />
         </div>
 
-        {/* 4. Evening Programme & Venue Details */}
-        <CelebrationDetailsSection />
-
-        {/* Delicate Royal Filigree Divider */}
-        <div className="flex items-center justify-center gap-3 text-[#8a6514]/40 my-2">
-          <div className="h-[1px] w-20 bg-gradient-to-r from-transparent to-[#8a6514]/40" />
-          <span className="text-sm tracking-widest">❦</span>
-          <div className="h-[1px] w-20 bg-gradient-to-l from-transparent to-[#8a6514]/40" />
-        </div>
-
-        {/* 5. Royal RSVP Confirmation Form */}
+        {/* 4. Royal RSVP Confirmation Form */}
         <RSVPSection />
 
         {/* Delicate Royal Filigree Divider */}
@@ -114,11 +102,8 @@ export default function App() {
           <div className="h-[1px] w-20 bg-gradient-to-l from-transparent to-[#8a6514]/40" />
         </div>
 
-        {/* 6. Blessings & Wishes Guestbook Wall */}
+        {/* 5. Blessings & Wishes Guestbook Wall */}
         <WishesGuestbook />
-
-        {/* 7. Royal Islamic Blessing & Footer */}
-        <WeddingFooter />
 
         {/* Floating Quick Navigation Bar */}
         <nav
@@ -141,16 +126,6 @@ export default function App() {
           >
             <Clock className="w-3.5 h-3.5 text-[#8a6514]" />
             <span className="hidden sm:inline">Countdown</span>
-          </button>
-
-          <span className="text-[#8a6514]/30">•</span>
-
-          <button
-            onClick={() => scrollTo('celebration-details-section')}
-            className="px-2.5 py-1 rounded-full text-[#543b22] hover:text-[#2c1d0f] hover:bg-[#8a6514]/10 transition-colors flex items-center gap-1.5 cursor-pointer font-semibold"
-          >
-            <CalendarDays className="w-3.5 h-3.5 text-[#8a6514]" />
-            <span className="hidden sm:inline">Programme</span>
           </button>
 
           <span className="text-[#8a6514]/30">•</span>
