@@ -13,6 +13,7 @@
 
   body {
     font-family: var(--font-serif-luxury);
+    background-color: #faf5ee;
     background-image: url('/bg.jfif');
     background-size: cover;
     background-position: center top;
@@ -57,6 +58,7 @@
 
 .text-gold-gradient {
   background: linear-gradient(135deg, #573a0e 0%, #8a6514 40%, #b38b37 70%, #573a0e 100%);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -99,5 +101,4 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-}
-/* test */
+} 
