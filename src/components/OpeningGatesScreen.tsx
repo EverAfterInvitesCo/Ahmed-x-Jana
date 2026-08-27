@@ -25,6 +25,10 @@ export const OpeningGatesScreen: React.FC<OpeningGatesScreenProps> = ({ onEnterW
   const handleOpenGates = () => {
     if (gatesOpening) return;
     setGatesOpening(true);
+
+    // Dispatch custom event to trigger audio playback immediately on entry
+    window.dispatchEvent(new CustomEvent('wedding-site-entered'));
+
     setTimeout(() => {
       onEnterWebsite();
     }, 1000); // 1s seamless cinematic crossfade
@@ -63,4 +67,3 @@ export const OpeningGatesScreen: React.FC<OpeningGatesScreenProps> = ({ onEnterW
     </motion.div>
   );
 };
-

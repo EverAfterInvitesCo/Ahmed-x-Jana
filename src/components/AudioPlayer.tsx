@@ -1,120 +1,70 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Volume2, VolumeX, Music } from 'lucide-react';
+import { Volume2, VolumeX } from 'lucide-react';
 
 export const AudioPlayer: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
-  const [audioInitialized, setAudioInitialized] = useState<boolean>(false);
-  const audioCtxRef = useRef<AudioContext | null>(null);
-  const gainNodeRef = useRef<GainNode | null>(null);
-  const intervalIdRef = useRef<number | null>(null);
-
-  // Gentle romantic harp & piano generative melody synthesizer
-  const playRomanticChords = () => {
-    try {
-      const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
-      if (!audioCtxRef.current) {
-        audioCtxRef.current = new AudioCtx();
-      }
-
-      const ctx = audioCtxRef.current;
-      if (ctx.state === 'suspended') {
-        ctx.resume();
-      }
-
-      if (!gainNodeRef.current) {
-        const masterGain = ctx.createGain();
-        masterGain.gain.setValueAtTime(0.25, ctx.currentTime);
-        masterGain.connect(ctx.destination);
-        gainNodeRef.current = masterGain;
-      }
-
-      // Romantic chord progressions in D Major / F# Minor (Fairytale classical wedding mood)
-      const chordNotes = [
-        [146.83, 220.00, 277.18, 369.99, 440.00], // D3, A3, C#4, F#4, A4
-        [185.00, 220.00, 277.18, 329.63, 440.00], // F#3, A3, C#4, E4, A4
-        [196.00, 246.94, 293.66, 369.99, 493.88], // G3, B3, D4, F#4, B4
-        [220.00, 277.18, 329.63, 440.00, 554.37], // A3, C#4, E4, A4, C#5
-      ];
-
-      let chordIndex = 0;
-
-      const triggerArpeggio = () => {
-        if (!audioCtxRef.current || !gainNodeRef.current) return;
-        const currentChord = chordNotes[chordIndex % chordNotes.length];
-        chordIndex++;
-
-        currentChord.forEach((freq, idx) => {
-          const osc = ctx.createOscillator();
-          const noteGain = ctx.createGain();
-
-          osc.type = idx % 2 === 0 ? 'sine' : 'triangle';
-          osc.frequency.setValueAtTime(freq, ctx.currentTime);
-
-          const startTime = ctx.currentTime + idx * 0.35;
-          const duration = 3.5;
-
-          noteGain.gain.setValueAtTime(0.0001, startTime);
-          noteGain.gain.exponentialRampToValueAtTime(0.12 / (idx + 1), startTime + 0.08);
-          noteGain.gain.exponentialRampToValueAtTime(0.00001, startTime + duration);
-
-          osc.connect(noteGain);
-          noteGain.connect(gainNodeRef.current!);
-
-          osc.start(startTime);
-          osc.stop(startTime + duration);
-        });
-      };
-
-      triggerArpeggio();
-
-      if (intervalIdRef.current) {
-        clearInterval(intervalIdRef.current);
-      }
-      intervalIdRef.current = window.setInterval(triggerArpeggio, 4000);
-      setIsPlaying(true);
-      setAudioInitialized(true);
-    } catch {
-      setIsPlaying(false);
-    }
-  };
-
-  const stopAudio = () => {
-    if (intervalIdRef.current) {
-      clearInterval(intervalIdRef.current);
-      intervalIdRef.current = null;
-    }
-    if (audioCtxRef.current && audioCtxRef.current.state === 'running') {
-      audioCtxRef.current.suspend();
-    }
-    setIsPlaying(false);
-  };
-
-  const toggleAudio = () => {
-    if (isPlaying) {
-      stopAudio();
-    } else {
-      playRomanticChords();
-    }
-  };
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
+    // Construct robust path for GitHub Pages subpath and local development
+    const basePath = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+    const audioPath = `${basePath.endsWith('/') ? basePath.slice(0, -1) : basePath}/adele.mp3`;
+
+    const audio = new Audio(audioPath);
+    audio.loop = true;
+    audio.preload = 'auto';
+    audioRef.current = audio;
+
     const handleFirstUserInteraction = () => {
-      if (!audioInitialized) {
-        playRomanticChords();
+      if (audioRef.current && audioRef.current.paused) {
+        audioRef.current
+          .play()
+          .then(() => {
+            setIsPlaying(true);
+          })
+          .catch((err) => {
+            console.log('Audio autoplay blocked or waiting for interaction:', err);
+          });
       }
+      cleanupListeners();
+    };
+
+    const cleanupListeners = () => {
       window.removeEventListener('click', handleFirstUserInteraction);
       window.removeEventListener('touchstart', handleFirstUserInteraction);
+      window.removeEventListener('keydown', handleFirstUserInteraction);
     };
 
     window.addEventListener('click', handleFirstUserInteraction);
     window.addEventListener('touchstart', handleFirstUserInteraction);
+    window.addEventListener('keydown', handleFirstUserInteraction);
 
     return () => {
-      stopAudio();
-      window.removeEventListener('click', handleFirstUserInteraction);
-      window.removeEventListener('touchstart', handleFirstUserInteraction);
+      cleanupListeners();
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+      }
     };
-  }, [audioInitialized]);
+  }, []);
+
+  const toggleAudio = () => {
+    if (!audioRef.current) return;
+
+    if (isPlaying) {
+      audioRef.current.pause();
+      setIsPlaying(false);
+    } else {
+      audioRef.current
+        .play()
+        .then(() => {
+          setIsPlaying(true);
+        })
+        .catch((err) => {
+          console.error('Playback failed:', err);
+        });
+    }
+  };
 
   return (
     <aside
@@ -125,7 +75,7 @@ export const AudioPlayer: React.FC = () => {
       <button
         onClick={toggleAudio}
         aria-pressed={isPlaying}
-        aria-label={isPlaying ? 'Mute romantic wedding music' : 'Play romantic wedding music'}
+        aria-label={isPlaying ? 'Mute wedding music' : 'Play wedding music'}
         className="group relative flex items-center gap-2.5 px-3.5 py-2 rounded-full bg-white/85 hover:bg-white text-[#44301d] font-royal text-xs tracking-wider border border-[#8a6514]/30 shadow-[0_4px_16px_rgba(138,101,20,0.15)] backdrop-blur-md transition-all duration-300 cursor-pointer select-none"
       >
         <div className="relative flex items-center justify-center w-5 h-5">

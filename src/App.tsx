@@ -90,6 +90,48 @@ export default function App() {
         {/* 4. Royal RSVP Confirmation Form */}
         <RSVPSection />
 
+        {/* Closing Branding & Social Footer */}
+        <footer className="w-full py-10 mt-12 flex flex-col items-center justify-center gap-4 text-center px-4 border-t border-[#8a6514]/20 bg-white/40 backdrop-blur-sm">
+          <div className="flex items-center gap-3 text-[#8a6514]/60">
+            <div className="h-[1px] w-12 bg-[#8a6514]/30" />
+            <span className="text-xs tracking-widest uppercase font-royal">Ever After Invites</span>
+            <div className="h-[1px] w-12 bg-[#8a6514]/30" />
+          </div>
+
+          <p className="text-xs sm:text-sm text-[#543b22] font-serif tracking-wide">
+            Made with love by <span className="font-semibold text-[#2c1d0f]">Ever After Invites</span>
+          </p>
+
+          <div className="flex items-center gap-6 text-xs font-royal tracking-widest uppercase mt-1">
+            <a
+              href="https://www.instagram.com/_everafterinvites_/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#543b22] hover:text-[#8a6514] transition-colors"
+            >
+              Instagram
+            </a>
+            <span className="text-[#8a6514]/40">•</span>
+            <a
+              href="https://www.tiktok.com/@_everafterinvites_"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#543b22] hover:text-[#8a6514] transition-colors"
+            >
+              TikTok
+            </a>
+            <span className="text-[#8a6514]/40">•</span>
+            <a
+              href="https://www.facebook.com/profile.php?id=61591562833010"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#543b22] hover:text-[#8a6514] transition-colors"
+            >
+              Facebook
+            </a>
+          </div>
+        </footer>
+
         {/* Floating Quick Navigation Bar */}
         <nav
           aria-label="Section Navigation"
