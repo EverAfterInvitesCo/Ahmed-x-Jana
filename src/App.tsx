@@ -27,12 +27,11 @@ export default function App() {
 
   return (
     <div className="relative min-h-screen bg-[#faf5ee] text-[#2c1d0f] selection:bg-[#8a6514]/25 selection:text-[#2c1d0f] overflow-x-hidden font-serif-luxury">
-      {/* Background Wallpaper */}
+      {/* Background Wallpaper mapped directly to public bg.png via BASE_URL */}
       <div
-        className="fixed inset-0 w-full h-full pointer-events-none -z-20 bg-cover bg-center bg-no-repeat"
+        className="fixed inset-0 w-full h-full pointer-events-none z-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: `url(${MEDIA_ASSETS.backgroundImg})`,
-          backgroundColor: '#faf5ee',
+          backgroundImage: `url(${import.meta.env.BASE_URL}bg.png)`,
         }}
       />
 
