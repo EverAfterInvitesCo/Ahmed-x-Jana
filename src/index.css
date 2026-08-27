@@ -14,6 +14,10 @@
   body {
     font-family: var(--font-serif-luxury);
     background-color: #faf5ee;
+    background-image: url('/bg.png');
+    background-size: cover;
+    background-position: center top;
+    background-attachment: fixed;
     color: #2c1d0f;
     overflow-x: hidden;
   }
@@ -61,7 +65,7 @@
 
 /* Royal Glass for Bright Floral Canvas */
 .royal-glass-bright {
-  background: rgba(255, 255, 255, 0.72);
+  background: rgba(255, 255, 255, 0.55);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(138, 101, 20, 0.22);
