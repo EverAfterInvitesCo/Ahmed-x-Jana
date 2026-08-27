@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Heart, Sparkles } from 'lucide-react';
+import { Heart } from 'lucide-react';
 
 export const WeddingFooter: React.FC = () => {
   return (
@@ -22,36 +22,21 @@ export const WeddingFooter: React.FC = () => {
           </span>
         </motion.div>
 
-        {/* Closing Islamic Prayer */}
-        <motion.p
+        {/* Names & Forever Date */}
+        <motion.div
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 1.0, delay: 0.1 }}
-          className="font-arabic text-2xl sm:text-3xl text-[#6b4e18] font-bold leading-loose mb-3 drop-shadow-[0_1px_2px_rgba(255,255,255,0.8)]"
+          className="flex flex-col items-center gap-1 mb-6"
         >
-          بَارَكَ اللَّهُ لَكُمَا وَبَارَكَ عَلَيْكُمَا وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ
-        </motion.p>
-
-        <motion.p
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1.0, delay: 0.2 }}
-          className="font-serif-luxury italic text-base sm:text-lg text-[#543b22] mb-6 max-w-md"
-        >
-          "May Allah bless you, shower His blessings upon you, and join you both in goodness and peace."
-        </motion.p>
-
-        {/* Names & Forever Date */}
-        <div className="flex flex-col items-center gap-1 mb-6">
           <h4 className="font-royal text-base sm:text-lg font-bold text-[#2c1d0f] tracking-wide">
             Ahmed Hossam & Jana Mohamed
           </h4>
           <span className="font-royal text-xs uppercase tracking-widest text-[#7a581a] font-semibold">
             21 January 2027 • Cairo, Egypt
           </span>
-        </div>
+        </motion.div>
 
         {/* Divider */}
         <div className="flex items-center gap-3 text-[#8a6514]/40 my-3">
