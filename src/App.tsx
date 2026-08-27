@@ -98,28 +98,28 @@ export default function App() {
         {/* 4. Royal RSVP Confirmation Form */}
         <RSVPSection />
 
-        {/* Traditional Wedding Blessing Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-40px' }}
-          transition={{ duration: 1.0 }}
-          className="w-full max-w-xl mx-auto py-10 px-6 text-center flex flex-col items-center gap-3"
-        >
-          <p className="font-arabic text-2xl sm:text-3xl text-[#6b4e18] font-bold leading-relaxed">
-            بَارَكَ اللَّهُ لَكُمَا وَبَارَكَ عَلَيْكُمْ وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ
-          </p>
-          <p className="font-serif-luxury italic text-sm sm:text-base text-[#543b22]/90 max-w-md">
-            "May Allah bless you, shower His blessings upon you, and join you both in goodness and peace."
-          </p>
-        </motion.div>
+        {/* Footer with Integrated Traditional Blessing & Branding */}
+        <footer className="w-full py-16 mt-16 flex flex-col items-center justify-center gap-6 text-center px-4 border-t border-[#8a6514]/25 bg-white/40 backdrop-blur-sm">
+          {/* Traditional Du'aa Inside Footer */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-30px' }}
+            transition={{ duration: 0.9 }}
+            className="flex flex-col items-center gap-3 max-w-xl mx-auto mb-2"
+          >
+            <p className="font-arabic text-xl sm:text-2xl md:text-3xl text-[#6b4e18] font-bold leading-relaxed">
+              بَارَكَ اللَّهُ لَكُمَا وَبَارَكَ عَلَيْكُمْ وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ
+            </p>
+            <p className="font-serif-luxury italic text-xs sm:text-sm text-[#543b22]/90">
+              "May Allah bless you, shower His blessings upon you, and join you both in goodness and peace."
+            </p>
+          </motion.div>
 
-        {/* Closing Branding & Social Footer */}
-        <footer className="w-full py-10 mt-4 flex flex-col items-center justify-center gap-4 text-center px-4 border-t border-[#8a6514]/20 bg-white/40 backdrop-blur-sm">
-          <div className="flex items-center gap-3 text-[#8a6514]/60">
-            <div className="h-[1px] w-12 bg-[#8a6514]/30" />
-            <span className="text-xs tracking-widest uppercase font-royal">Ever After Invites</span>
-            <div className="h-[1px] w-12 bg-[#8a6514]/30" />
+          <div className="flex items-center gap-3 text-[#8a6514]/60 w-48">
+            <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent to-[#8a6514]/40" />
+            <span className="text-[10px] tracking-widest uppercase font-royal">Ever After Invites</span>
+            <div className="h-[1px] flex-1 bg-gradient-to-l from-transparent to-[#8a6514]/40" />
           </div>
 
           <p className="text-xs sm:text-sm text-[#543b22] font-serif tracking-wide">
