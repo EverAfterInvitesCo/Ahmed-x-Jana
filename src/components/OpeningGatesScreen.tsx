@@ -20,7 +20,7 @@ export const OpeningGatesScreen: React.FC<OpeningGatesScreenProps> = ({ onEnterW
       video.play().catch((err) => console.log('Video play error:', err));
     }
 
-    // Trigger audio playback instantly
+    // Trigger audio playback only on user tap
     window.dispatchEvent(new CustomEvent('wedding-site-entered'));
   };
 
@@ -37,10 +37,9 @@ export const OpeningGatesScreen: React.FC<OpeningGatesScreenProps> = ({ onEnterW
       onClick={handleOpenGates}
       className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#faf5ee] overflow-hidden cursor-pointer"
     >
-      {/* Background Video (Plays on tap, then transitions site on end) */}
+      {/* Background Video (Paused on first frame until tapped, no autoPlay) */}
       <video
         ref={videoRef}
-        autoPlay
         muted
         playsInline
         preload="auto"
