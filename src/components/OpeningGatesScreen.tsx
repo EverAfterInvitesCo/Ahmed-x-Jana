@@ -16,7 +16,6 @@ export const OpeningGatesScreen: React.FC<OpeningGatesScreenProps> = ({ onEnterW
 
     const video = videoRef.current;
     if (video) {
-      // Play the gates.mp4 video smoothly from the start
       video.currentTime = 0;
       video.play().catch((err) => console.log('Video play error:', err));
     }
@@ -38,9 +37,10 @@ export const OpeningGatesScreen: React.FC<OpeningGatesScreenProps> = ({ onEnterW
       onClick={handleOpenGates}
       className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#faf5ee] overflow-hidden cursor-pointer"
     >
-      {/* Background Video (Gates MP4 - paused on first frame until tapped) */}
+      {/* Background Video — autoPlay ensures mobile browsers render the first frame immediately */}
       <video
         ref={videoRef}
+        autoPlay
         muted
         playsInline
         preload="auto"
