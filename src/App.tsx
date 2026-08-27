@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
+import { Lock } from 'lucide-react';
 import { OpeningGatesScreen } from './components/OpeningGatesScreen';
 import { HeroDovesSection } from './components/HeroDovesSection';
 import { QuranicAyahSection } from './components/QuranicAyahSection';
@@ -7,20 +8,14 @@ import { CountdownSection } from './components/CountdownSection';
 import { RSVPSection } from './components/RSVPSection';
 import { FallingLeavesCanvas } from './components/FallingLeavesCanvas';
 import { AudioPlayer } from './components/AudioPlayer';
-import { BookOpen, Clock, Heart } from 'lucide-react';
+import { AdminRSVPModal } from './components/AdminRSVPModal';
 
 export default function App() {
   const [hasEntered, setHasEntered] = useState<boolean>(false);
+  const [isAdminOpen, setIsAdminOpen] = useState<boolean>(false);
 
   const handleEnterWebsite = () => {
     setHasEntered(true);
-  };
-
-  const scrollTo = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
   };
 
   return (
@@ -39,8 +34,18 @@ export default function App() {
       {/* Background Falling Golden Leaves & Rose Petals */}
       <FallingLeavesCanvas />
 
-      {/* Floating Royal Audio Controller */}
-      <AudioPlayer />
+      {/* Floating Top Controls (Audio Player + Private Organizer Lock Icon) */}
+      <div className="fixed top-5 right-5 z-40 flex items-center gap-2">
+        <button
+          onClick={() => setIsAdminOpen(true)}
+          aria-label="Organizer Portal"
+          title="Organizer Portal"
+          className="flex items-center justify-center w-9 h-9 rounded-full bg-white/85 hover:bg-white text-[#8a6514] border border-[#8a6514]/30 shadow-[0_4px_16px_rgba(138,101,20,0.15)] backdrop-blur-md transition-all duration-300 cursor-pointer"
+        >
+          <Lock className="w-4 h-4" />
+        </button>
+        <AudioPlayer />
+      </div>
 
       {/* Opening Screen — Fullscreen Royal Gates Video */}
       <AnimatePresence>
@@ -49,13 +54,16 @@ export default function App() {
         )}
       </AnimatePresence>
 
+      {/* Private Admin Modal */}
+      <AdminRSVPModal isOpen={isAdminOpen} onClose={() => setIsAdminOpen(false)} />
+
       {/* Main Consecutive Royal Wedding Scroll Site */}
       <motion.main
         id="main-wedding-experience"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1.2, ease: 'easeInOut' }}
-        className="relative w-full flex flex-col items-center z-10 pb-20"
+        className="relative w-full flex flex-col items-center z-10 pb-12"
       >
         {/* 1. Hero Welcome & Royal Announcement */}
         <HeroDovesSection />
@@ -131,40 +139,6 @@ export default function App() {
             </a>
           </div>
         </footer>
-
-        {/* Floating Quick Navigation Bar */}
-        <nav
-          aria-label="Section Navigation"
-          className="fixed bottom-5 z-40 px-4 py-2 rounded-full bg-white/85 backdrop-blur-md border border-[#8a6514]/30 shadow-[0_8px_30px_rgba(138,101,20,0.15)] flex items-center gap-2 text-xs font-royal tracking-wider"
-        >
-          <button
-            onClick={() => scrollTo('quranic-ayah-section')}
-            className="px-2.5 py-1 rounded-full text-[#543b22] hover:text-[#2c1d0f] hover:bg-[#8a6514]/10 transition-colors flex items-center gap-1.5 cursor-pointer font-semibold"
-          >
-            <BookOpen className="w-3.5 h-3.5 text-[#8a6514]" />
-            <span className="hidden sm:inline">Verse</span>
-          </button>
-
-          <span className="text-[#8a6514]/30">•</span>
-
-          <button
-            onClick={() => scrollTo('countdown-section')}
-            className="px-2.5 py-1 rounded-full text-[#543b22] hover:text-[#2c1d0f] hover:bg-[#8a6514]/10 transition-colors flex items-center gap-1.5 cursor-pointer font-semibold"
-          >
-            <Clock className="w-3.5 h-3.5 text-[#8a6514]" />
-            <span className="hidden sm:inline">Countdown</span>
-          </button>
-
-          <span className="text-[#8a6514]/30">•</span>
-
-          <button
-            onClick={() => scrollTo('rsvp-section')}
-            className="px-2.5 py-1 rounded-full text-[#543b22] hover:text-[#2c1d0f] hover:bg-[#8a6514]/10 transition-colors flex items-center gap-1.5 cursor-pointer font-semibold"
-          >
-            <Heart className="w-3.5 h-3.5 text-[#8a6514]" />
-            <span>RSVP</span>
-          </button>
-        </nav>
       </motion.main>
     </div>
   );

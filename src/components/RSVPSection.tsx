@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { CheckCircle2, XCircle, Send, Sparkles, Copy, Check, HeartHandshake } from 'lucide-react';
+import { CheckCircle2, XCircle, Send, Copy, Check, HeartHandshake } from 'lucide-react';
 import { RSVPData } from '../types';
 
 export const RSVPSection: React.FC = () => {
@@ -33,12 +33,34 @@ export const RSVPSection: React.FC = () => {
     e.preventDefault();
     if (!formData.guestName.trim()) return;
 
+    const timestamp = new Date().toISOString();
     const finalData: RSVPData = {
       ...formData,
-      createdAt: new Date().toISOString(),
+      createdAt: timestamp,
     };
 
+    // 1. Save single client session
     localStorage.setItem('ahmed_jana_wedding_rsvp', JSON.stringify(finalData));
+
+    // 2. Format and push to the admin dashboard list (`wedding_rsvps`)
+    const newAdminRecord = {
+      id: Date.now().toString(),
+      name: finalData.guestName,
+      attendance: finalData.attendance === 'attending' ? `Attending (${finalData.numberOfGuests} Guests)` : 'Declined',
+      guestsCount: finalData.attendance === 'attending' ? finalData.numberOfGuests.toString() : '0',
+      message: finalData.dietaryOrNote,
+      timestamp: timestamp,
+    };
+
+    try {
+      const existingRecords = JSON.parse(localStorage.getItem('wedding_rsvps') || '[]');
+      // Filter out previous entry by same name if editing, or just prepend
+      const filtered = existingRecords.filter((r: { name: string }) => r.name.toLowerCase() !== finalData.guestName.toLowerCase());
+      localStorage.setItem('wedding_rsvps', JSON.stringify([newAdminRecord, ...filtered]));
+    } catch {
+      localStorage.setItem('wedding_rsvps', JSON.stringify([newAdminRecord]));
+    }
+
     setSubmitted(true);
   };
 
@@ -92,7 +114,7 @@ export const RSVPSection: React.FC = () => {
           </p>
         </motion.div>
 
-        {/* Form or Confirmation (Seamlessly integrated on floral background) */}
+        {/* Form or Confirmation */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
