@@ -7,20 +7,16 @@ export const AudioPlayer: React.FC = () => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
-    // Initialize the audio object directly using JavaScript's Audio API
+    // Initialize the audio object using your adele.mp3 asset
     const audio = new Audio(MEDIA_ASSETS.audioTrack);
     audio.loop = true;
-    audio.volume = 0.4;
+    audio.volume = 0.4; // Soft background volume
     audioRef.current = audio;
 
     const handleSiteEntered = () => {
       audio.play()
-        .then(() => {
-          setIsPlaying(true);
-        })
-        .catch((err) => {
-          console.log('Autoplay was prevented by browser policies:', err);
-        });
+        .then(() => setIsPlaying(true))
+        .catch((err) => console.log('Audio playback prevented by browser policy:', err));
     };
 
     window.addEventListener('wedding-site-entered', handleSiteEntered);
@@ -40,12 +36,8 @@ export const AudioPlayer: React.FC = () => {
       setIsPlaying(false);
     } else {
       audio.play()
-        .then(() => {
-          setIsPlaying(true);
-        })
-        .catch((err) => {
-          console.log('Playback error:', err);
-        });
+        .then(() => setIsPlaying(true))
+        .catch((err) => console.log('Playback error:', err));
     }
   };
 
