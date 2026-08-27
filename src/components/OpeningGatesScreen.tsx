@@ -40,4 +40,4 @@ export const OpeningGatesScreen: React.FC<OpeningGatesScreenProps> = ({ onEnterW
       />
     </motion.div>
   );
-};
+}; 
