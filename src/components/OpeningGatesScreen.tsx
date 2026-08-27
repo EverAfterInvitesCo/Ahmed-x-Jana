@@ -20,13 +20,13 @@ export const OpeningGatesScreen: React.FC<OpeningGatesScreenProps> = ({ onEnterW
       video.play().catch((err) => console.log('Video play error:', err));
     }
 
-    // Trigger the audio event to start playing adele.mp3
+    // Trigger audio playback instantly
     window.dispatchEvent(new CustomEvent('wedding-site-entered'));
+  };
 
-    // Wait for the gates video animation to finish before entering the site
-    setTimeout(() => {
-      onEnterWebsite();
-    }, 2500);
+  const handleVideoEnded = () => {
+    // Automatically enter the website once the gates video finishes playing
+    onEnterWebsite();
   };
 
   return (
@@ -37,13 +37,14 @@ export const OpeningGatesScreen: React.FC<OpeningGatesScreenProps> = ({ onEnterW
       onClick={handleOpenGates}
       className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#faf5ee] overflow-hidden cursor-pointer"
     >
-      {/* Background Video — autoPlay ensures mobile browsers render the first frame immediately */}
+      {/* Background Video (Plays on tap, then transitions site on end) */}
       <video
         ref={videoRef}
         autoPlay
         muted
         playsInline
         preload="auto"
+        onEnded={handleVideoEnded}
         className="absolute inset-0 w-full h-full object-cover pointer-events-none"
         src={MEDIA_ASSETS.gatesVideo}
       />
