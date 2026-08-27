@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
-import { Calendar, Download, Sparkles, Clock, MapPin } from 'lucide-react';
+import { Calendar, Download, Clock } from 'lucide-react';
 import { TimeRemaining } from '../types';
 
 interface CountdownSectionProps {
@@ -97,10 +97,10 @@ export const CountdownSection: React.FC<CountdownSectionProps> = ({
   };
 
   const timeUnits = [
-    { label: 'Days', labelAr: 'يوم', value: timeLeft.days },
-    { label: 'Hours', labelAr: 'ساعة', value: timeLeft.hours },
-    { label: 'Minutes', labelAr: 'دقيقة', value: timeLeft.minutes },
-    { label: 'Seconds', labelAr: 'ثانية', value: timeLeft.seconds },
+    { label: 'Days', value: timeLeft.days },
+    { label: 'Hours', value: timeLeft.hours },
+    { label: 'Minutes', value: timeLeft.minutes },
+    { label: 'Seconds', value: timeLeft.seconds },
   ];
 
   return (
@@ -127,20 +127,16 @@ export const CountdownSection: React.FC<CountdownSectionProps> = ({
             <div className="h-[1px] w-8 sm:w-16 bg-gradient-to-l from-transparent to-[#8a6514]" />
           </div>
 
-          <h2 className="font-royal text-2xl sm:text-3xl md:text-4xl font-bold text-[#2c1d0f] tracking-wide mb-1">
+          <h2 className="font-royal text-2xl sm:text-3xl md:text-4xl font-bold text-[#2c1d0f] tracking-wide mb-2">
             Counting Down to Forever
           </h2>
-
-          <p className="font-arabic text-xl sm:text-2xl text-[#6b4e18] font-bold mb-2">
-            العد التنازلي لليلة العمر
-          </p>
 
           <p className="font-serif-luxury italic text-base sm:text-lg text-[#543b22]">
             Thursday, 21 January 2027 • 6:00 PM
           </p>
         </motion.div>
 
-        {/* 4 Open Countdown Dials (No enclosing box) */}
+        {/* 4 Open Countdown Dials */}
         <motion.div
           initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -158,9 +154,6 @@ export const CountdownSection: React.FC<CountdownSectionProps> = ({
               </span>
               <span className="font-royal text-[9px] sm:text-[11px] uppercase tracking-widest text-[#7a581a] font-bold mt-1">
                 {unit.label}
-              </span>
-              <span className="font-arabic text-[11px] sm:text-xs text-[#8a6514] font-medium">
-                {unit.labelAr}
               </span>
             </div>
           ))}

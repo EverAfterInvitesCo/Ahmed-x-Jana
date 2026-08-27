@@ -54,7 +54,6 @@ export const RSVPSection: React.FC = () => {
 
     try {
       const existingRecords = JSON.parse(localStorage.getItem('wedding_rsvps') || '[]');
-      // Filter out previous entry by same name if editing, or just prepend
       const filtered = existingRecords.filter((r: { name: string }) => r.name.toLowerCase() !== finalData.guestName.toLowerCase());
       localStorage.setItem('wedding_rsvps', JSON.stringify([newAdminRecord, ...filtered]));
     } catch {
@@ -101,13 +100,9 @@ export const RSVPSection: React.FC = () => {
             <div className="h-[1px] w-8 sm:w-16 bg-gradient-to-l from-transparent to-[#8a6514]" />
           </div>
 
-          <h2 className="font-royal text-2xl sm:text-3xl md:text-4xl font-bold text-[#2c1d0f] tracking-wide mb-1">
+          <h2 className="font-royal text-2xl sm:text-3xl md:text-4xl font-bold text-[#2c1d0f] tracking-wide mb-2">
             RSVP Confirmation
           </h2>
-
-          <p className="font-arabic text-xl sm:text-2xl text-[#6b4e18] font-bold mb-2">
-            يسعدنا تأكيد حضوركم ومشاركتنا الفرحة
-          </p>
 
           <p className="font-serif-luxury italic text-base sm:text-lg text-[#543b22]">
             Please reply by 20 December 2026
@@ -259,13 +254,9 @@ export const RSVPSection: React.FC = () => {
                   <CheckCircle2 className="w-8 h-8 text-[#8a6514]" />
                 </div>
 
-                <h3 className="font-royal text-2xl sm:text-3xl font-bold text-[#2c1d0f] mb-1">
+                <h3 className="font-royal text-2xl sm:text-3xl font-bold text-[#2c1d0f] mb-4">
                   Thank You, {formData.guestName}!
                 </h3>
-
-                <p className="font-arabic text-xl text-[#6b4e18] font-bold mb-4">
-                  تم تسجيل تأكيد حضوركم بنجاح
-                </p>
 
                 <div className="w-full p-5 rounded-2xl bg-white border border-[#8a6514]/25 text-left my-3 flex flex-col gap-2 font-serif-luxury text-sm text-[#3b2a1a] shadow-xs">
                   <div className="flex justify-between border-b border-[#8a6514]/15 pb-2">

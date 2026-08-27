@@ -28,7 +28,7 @@ export const HeroDovesSection: React.FC = () => {
   return (
     <section
       id="hero-doves-section"
-      className="relative min-h-[92vh] w-full flex flex-col items-center justify-between pt-12 sm:pt-16 pb-8 px-4 text-center overflow-hidden bg-white"
+      className="relative min-h-[92vh] w-full flex flex-col items-center justify-between pt-12 sm:pt-16 pb-8 px-4 text-center overflow-hidden bg-transparent"
     >
       {/* Background Video - Full Opacity */}
       <video
@@ -63,11 +63,6 @@ export const HeroDovesSection: React.FC = () => {
             <Sparkles className="w-3.5 h-3.5 text-black" />
             <div className="h-[1px] w-8 sm:w-16 bg-gradient-to-l from-transparent to-black" />
           </div>
-
-          {/* Arabic Names with 'و' */}
-          <p className="font-arabic text-3xl sm:text-4xl md:text-5xl text-black font-bold leading-relaxed mb-2">
-            أحمد حسام و جنى محمد
-          </p>
 
           {/* English Names */}
           <h1 className="font-royal text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-black font-semibold tracking-wide mb-3">
