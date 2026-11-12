@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
-import { Calendar, Download, Clock } from 'lucide-react';
+import { Calendar, Download } from 'lucide-react';
 import { TimeRemaining } from '../types';
+import { FloralDivider } from './FloralOrnament';
 
 interface CountdownSectionProps {
   targetDate?: string;
 }
 
 export const CountdownSection: React.FC<CountdownSectionProps> = ({
-  targetDate = '2027-01-21T18:00:00',
+  targetDate = '2027-01-07T18:00:00',
 }) => {
   const [timeLeft, setTimeLeft] = useState<TimeRemaining>({
     days: 0,
@@ -54,18 +55,16 @@ export const CountdownSection: React.FC<CountdownSectionProps> = ({
     return () => clearInterval(interval);
   }, [targetDate]);
 
-  const handleAddToCalendar = () => {
-    const title = encodeURIComponent("Ahmed & Jana's Royal Wedding Celebration");
+  const googleCalendarUrl = (() => {
+    const title = encodeURIComponent("Ahmed & Jana's Wedding Celebration");
     const details = encodeURIComponent(
-      'Celebrating the holy matrimony of Ahmed Hossam & Jana Mohamed. Join us for a joyous evening of love, prayers, and banquet celebration!'
+      'Celebrating the holy matrimony of Ahmed Hossam & Jana Mohamed at Sofitel Cairo Nile El Gezirah. Join us for a joyous evening of love and prayers.'
     );
-    const location = encodeURIComponent('The Grand Nile Palace Ballroom, Cairo, Egypt');
-    const start = '20270121T160000Z';
-    const end = '20270121T230000Z';
-
-    const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${start}/${end}&details=${details}&location=${location}`;
-    window.open(googleCalendarUrl, '_blank', 'noopener,noreferrer');
-  };
+    const location = encodeURIComponent('Sofitel Cairo Nile El Gezirah, Cairo, Egypt');
+    const start = '20270107T160000Z';
+    const end = '20270107T230000Z';
+    return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${start}/${end}&details=${details}&location=${location}`;
+  })();
 
   const handleDownloadICS = () => {
     const icsContent = [
@@ -76,12 +75,12 @@ export const CountdownSection: React.FC<CountdownSectionProps> = ({
       'METHOD:PUBLISH',
       'BEGIN:VEVENT',
       'UID:ahmed-jana-wedding-2027@everafterinvites.com',
-      'DTSTAMP:20260826T000000Z',
-      'DTSTART:20270121T160000Z',
-      'DTEND:20270121T230000Z',
+      'DTSTAMP:20261112T000000Z',
+      'DTSTART:20270107T160000Z',
+      'DTEND:20270107T230000Z',
       'SUMMARY:Ahmed & Jana Wedding Celebration',
-      'DESCRIPTION:Join us to celebrate the marriage of Ahmed Hossam & Jana Mohamed in Cairo.',
-      'LOCATION:The Grand Nile Palace Ballroom, Cairo, Egypt',
+      'DESCRIPTION:Join us to celebrate the marriage of Ahmed Hossam & Jana Mohamed at Sofitel, Cairo.',
+      'LOCATION:Sofitel Cairo Nile El Gezirah, Cairo, Egypt',
       'STATUS:CONFIRMED',
       'END:VEVENT',
       'END:VCALENDAR',
@@ -114,72 +113,71 @@ export const CountdownSection: React.FC<CountdownSectionProps> = ({
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-50px' }}
-          transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-col items-center mb-10"
+          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+          className="flex flex-col items-center mb-10 w-full"
         >
-          <div className="flex items-center gap-2 mb-3">
-            <div className="h-[1px] w-8 sm:w-16 bg-gradient-to-r from-transparent to-[#8a6514]" />
-            <Clock className="w-4 h-4 text-[#8a6514]" />
-            <span className="font-royal text-[11px] sm:text-xs uppercase tracking-[0.4em] text-[#7a581a] font-bold">
-              The Grand Day
-            </span>
-            <Clock className="w-4 h-4 text-[#8a6514]" />
-            <div className="h-[1px] w-8 sm:w-16 bg-gradient-to-l from-transparent to-[#8a6514]" />
-          </div>
+          <FloralDivider className="mb-4" />
 
-          <h2 className="font-royal text-2xl sm:text-3xl md:text-4xl font-bold text-[#2c1d0f] tracking-wide mb-2">
-            Counting Down to Forever
+          <span className="font-royal text-[11px] sm:text-xs uppercase tracking-[0.38em] text-[#854d4a] font-semibold mb-2">
+            The Grand Day
+          </span>
+
+          <h2 className="font-royal text-2xl sm:text-3xl md:text-4xl font-bold text-[#202b26] tracking-wide mb-2 text-balance">
+            {timeLeft.isExpired ? 'Our Celebration Date' : 'Counting Down to Forever'}
           </h2>
 
-          <p className="font-serif-luxury italic text-base sm:text-lg text-[#543b22]">
-            Thursday, 21 January 2027 • 6:00 PM
+          <p className="font-serif-luxury italic text-base sm:text-lg text-[#42524a]">
+            Thursday, 7 January 2027 · 6:00 PM
           </p>
         </motion.div>
 
-        {/* 4 Open Countdown Dials */}
+        {/* 4 Countdown Dials */}
         <motion.div
-          initial={{ opacity: 0, y: 25 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-50px' }}
-          transition={{ duration: 1.1, delay: 0.15 }}
+          transition={{ duration: 1.0, delay: 0.1 }}
           className="grid grid-cols-4 gap-2.5 sm:gap-6 w-full max-w-xl mx-auto mb-10"
         >
           {timeUnits.map((unit) => (
             <div
               key={unit.label}
-              className="flex flex-col items-center p-3 sm:p-5 rounded-2xl bg-white/75 backdrop-blur-sm border border-[#8a6514]/25 shadow-[0_4px_16px_rgba(138,101,20,0.08)] transition-transform hover:scale-102"
+              className="flex flex-col items-center p-3 sm:p-5 rounded-2xl sofitel-surface transition-transform duration-200 hover:scale-[1.02]"
             >
-              <span className="font-royal text-2xl sm:text-4xl md:text-5xl font-bold text-[#2c1d0f] tracking-tight">
+              <span className="font-royal tabular-nums text-2xl sm:text-4xl md:text-5xl font-bold text-[#202b26] tracking-tight">
                 {String(unit.value).padStart(2, '0')}
               </span>
-              <span className="font-royal text-[9px] sm:text-[11px] uppercase tracking-widest text-[#7a581a] font-bold mt-1">
+              <span className="font-royal text-[9px] sm:text-[11px] uppercase tracking-widest text-[#854d4a] font-semibold mt-1">
                 {unit.label}
               </span>
             </div>
           ))}
         </motion.div>
 
-        {/* Action Buttons */}
+        {/* Calendar Action Buttons */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-40px' }}
-          transition={{ duration: 1.0, delay: 0.3 }}
+          transition={{ duration: 0.9, delay: 0.2 }}
           className="flex flex-wrap items-center justify-center gap-3"
         >
-          <button
-            onClick={handleAddToCalendar}
-            className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#8a6514] hover:bg-[#70510e] text-white font-royal text-xs font-bold uppercase tracking-wider shadow-md hover:shadow-lg transition-all cursor-pointer"
+          <a
+            href={googleCalendarUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#b37874] hover:bg-[#854d4a] text-white font-royal text-xs font-semibold uppercase tracking-wider shadow-sm transition-colors whitespace-nowrap shrink-0"
           >
             <Calendar className="w-4 h-4 text-white" />
             <span>Save to Google Calendar</span>
-          </button>
+          </a>
 
           <button
+            type="button"
             onClick={handleDownloadICS}
-            className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/80 hover:bg-white text-[#2c1d0f] border border-[#8a6514]/30 font-royal text-xs font-bold uppercase tracking-wider shadow-xs hover:shadow-md transition-all cursor-pointer"
+            className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/85 hover:bg-white text-[#202b26] border border-[#51665c]/30 font-royal text-xs font-semibold uppercase tracking-wider shadow-xs transition-colors cursor-pointer whitespace-nowrap shrink-0"
           >
-            <Download className="w-4 h-4 text-[#8a6514]" />
+            <Download className="w-4 h-4 text-[#32443c]" />
             <span>Download .ICS (Apple/Outlook)</span>
           </button>
         </motion.div>

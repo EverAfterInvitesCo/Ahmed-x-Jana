@@ -11,7 +11,7 @@ interface Particle {
   oscillationSpeed: number;
   oscillationDistance: number;
   oscillationOffset: number;
-  type: 'gold-leaf' | 'olive-leaf' | 'rose-petal' | 'stardust';
+  type: 'velvet-petal' | 'sage-leaf' | 'blush-petal' | 'candle-mote';
   color: string;
   opacity: number;
   scaleX: number;
@@ -41,7 +41,6 @@ export const FallingLeavesCanvas: React.FC = () => {
 
     window.addEventListener('resize', handleResize, { passive: true });
 
-    // Track scroll velocity for breeze effect
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       const delta = currentScrollY - lastScrollY.current;
@@ -51,58 +50,56 @@ export const FallingLeavesCanvas: React.FC = () => {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
 
-    // Check prefers-reduced-motion
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const count = prefersReducedMotion ? 6 : width < 768 ? 22 : 42;
+    const count = prefersReducedMotion ? 6 : width < 768 ? 20 : 38;
 
     const particles: Particle[] = [];
 
-    const types: ('gold-leaf' | 'olive-leaf' | 'rose-petal' | 'stardust')[] = [
-      'gold-leaf',
-      'gold-leaf',
-      'olive-leaf',
-      'rose-petal',
-      'rose-petal',
-      'stardust',
+    const types: Particle['type'][] = [
+      'velvet-petal',
+      'velvet-petal',
+      'sage-leaf',
+      'sage-leaf',
+      'blush-petal',
+      'candle-mote',
     ];
 
-    const goldColors = ['#d4af37', '#e6cb89', '#f3d99d', '#c59b27', '#e1be6c'];
-    const oliveColors = ['#8a9a5b', '#a3b18a', '#588157', '#6b705c'];
-    const petalColors = ['#f7d1cd', '#e8c2ca', '#f8edeb', '#ffcad4', '#fae1dd'];
+    const velvetPinkColors = ['#c98e8a', '#b37874', '#d8a6a2', '#dfbab6'];
+    const sageGreenColors = ['#51665c', '#697e74', '#3d5148', '#798b82'];
+    const blushColors = ['#f0d6d3', '#e7c5c1', '#f7e6e4', '#e4b7b3'];
 
     const createParticle = (initialY = -30): Particle => {
       const type = types[Math.floor(Math.random() * types.length)];
-      let color = '#d4af37';
+      let color = '#c98e8a';
 
-      if (type === 'gold-leaf') {
-        color = goldColors[Math.floor(Math.random() * goldColors.length)];
-      } else if (type === 'olive-leaf') {
-        color = oliveColors[Math.floor(Math.random() * oliveColors.length)];
-      } else if (type === 'rose-petal') {
-        color = petalColors[Math.floor(Math.random() * petalColors.length)];
+      if (type === 'velvet-petal') {
+        color = velvetPinkColors[Math.floor(Math.random() * velvetPinkColors.length)];
+      } else if (type === 'sage-leaf') {
+        color = sageGreenColors[Math.floor(Math.random() * sageGreenColors.length)];
+      } else if (type === 'blush-petal') {
+        color = blushColors[Math.floor(Math.random() * blushColors.length)];
       } else {
-        color = '#fff6d6';
+        color = '#f5e2c4';
       }
 
       return {
         x: Math.random() * width,
         y: initialY === -30 ? Math.random() * -height * 0.5 : initialY,
-        size: type === 'stardust' ? 1.5 + Math.random() * 2 : 10 + Math.random() * 14,
-        speedY: 0.6 + Math.random() * 1.2,
-        speedX: (Math.random() - 0.5) * 0.8,
+        size: type === 'candle-mote' ? 1.4 + Math.random() * 1.8 : 9 + Math.random() * 12,
+        speedY: 0.55 + Math.random() * 1.1,
+        speedX: (Math.random() - 0.5) * 0.75,
         rotation: Math.random() * Math.PI * 2,
         rotationSpeed: (Math.random() - 0.5) * 0.02,
         oscillationSpeed: 0.01 + Math.random() * 0.02,
-        oscillationDistance: 20 + Math.random() * 40,
+        oscillationDistance: 20 + Math.random() * 36,
         oscillationOffset: Math.random() * Math.PI * 2,
         type,
         color,
-        opacity: type === 'stardust' ? 0.3 + Math.random() * 0.7 : 0.6 + Math.random() * 0.35,
+        opacity: type === 'candle-mote' ? 0.35 + Math.random() * 0.45 : 0.45 + Math.random() * 0.35,
         scaleX: 1,
       };
     };
 
-    // Populate initial particles spread across the viewport
     for (let i = 0; i < count; i++) {
       particles.push(createParticle(Math.random() * height));
     }
@@ -116,57 +113,35 @@ export const FallingLeavesCanvas: React.FC = () => {
       ctx.scale(p.scaleX, 1);
       ctx.globalAlpha = p.opacity;
 
-      if (p.type === 'stardust') {
-        // Glowing stardust particle
+      if (p.type === 'candle-mote') {
         ctx.fillStyle = p.color;
-        ctx.shadowColor = '#f3d99d';
-        ctx.shadowBlur = 8;
+        ctx.shadowColor = '#e6c99b';
+        ctx.shadowBlur = 7;
         ctx.beginPath();
         ctx.arc(0, 0, p.size, 0, Math.PI * 2);
         ctx.fill();
-      } else if (p.type === 'rose-petal') {
-        // Soft rounded rose petal
+      } else if (p.type === 'blush-petal' || p.type === 'velvet-petal') {
         ctx.fillStyle = p.color;
-        ctx.shadowColor = 'rgba(232, 194, 202, 0.3)';
+        ctx.shadowColor = 'rgba(179, 120, 116, 0.22)';
         ctx.shadowBlur = 4;
         ctx.beginPath();
         ctx.moveTo(0, -p.size * 0.7);
-        ctx.bezierCurveTo(p.size * 0.6, -p.size * 0.6, p.size * 0.7, p.size * 0.4, 0, p.size);
-        ctx.bezierCurveTo(-p.size * 0.7, p.size * 0.4, -p.size * 0.6, -p.size * 0.6, 0, -p.size * 0.7);
+        ctx.bezierCurveTo(p.size * 0.62, -p.size * 0.58, p.size * 0.72, p.size * 0.42, 0, p.size);
+        ctx.bezierCurveTo(-p.size * 0.72, p.size * 0.42, -p.size * 0.62, -p.size * 0.58, 0, -p.size * 0.7);
         ctx.fill();
-      } else if (p.type === 'olive-leaf') {
-        // Slender olive leaf
+      } else {
         ctx.fillStyle = p.color;
         ctx.beginPath();
-        ctx.moveTo(0, -p.size * 0.8);
-        ctx.quadraticCurveTo(p.size * 0.35, 0, 0, p.size * 0.8);
-        ctx.quadraticCurveTo(-p.size * 0.35, 0, 0, -p.size * 0.8);
+        ctx.moveTo(0, -p.size * 0.85);
+        ctx.quadraticCurveTo(p.size * 0.36, 0, 0, p.size * 0.85);
+        ctx.quadraticCurveTo(-p.size * 0.36, 0, 0, -p.size * 0.85);
         ctx.fill();
 
-        // Subtle gold-green vein
-        ctx.strokeStyle = 'rgba(255, 240, 200, 0.4)';
+        ctx.strokeStyle = 'rgba(248, 243, 240, 0.35)';
         ctx.lineWidth = 0.6;
         ctx.beginPath();
         ctx.moveTo(0, -p.size * 0.7);
         ctx.lineTo(0, p.size * 0.7);
-        ctx.stroke();
-      } else {
-        // Royal golden leaf
-        ctx.fillStyle = p.color;
-        ctx.shadowColor = 'rgba(212, 175, 55, 0.4)';
-        ctx.shadowBlur = 6;
-        ctx.beginPath();
-        ctx.moveTo(0, -p.size);
-        ctx.bezierCurveTo(p.size * 0.5, -p.size * 0.4, p.size * 0.5, p.size * 0.5, 0, p.size);
-        ctx.bezierCurveTo(-p.size * 0.5, p.size * 0.5, -p.size * 0.5, -p.size * 0.4, 0, -p.size);
-        ctx.fill();
-
-        // Delicate central vein
-        ctx.strokeStyle = 'rgba(255, 255, 230, 0.5)';
-        ctx.lineWidth = 0.7;
-        ctx.beginPath();
-        ctx.moveTo(0, -p.size * 0.85);
-        ctx.lineTo(0, p.size * 0.85);
         ctx.stroke();
       }
 
@@ -177,25 +152,20 @@ export const FallingLeavesCanvas: React.FC = () => {
       ctx.clearRect(0, 0, width, height);
       time += 0.02;
 
-      // Dampen scroll velocity smoothly
       scrollVelocityRef.current *= 0.94;
       const extraSpeedY = scrollVelocityRef.current;
 
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
-
-        // 3D-like fluttering effect
         p.scaleX = Math.cos(time * 2 + p.oscillationOffset);
         p.rotation += p.rotationSpeed;
 
-        // Oscillate horizontally
         const sway = Math.sin(time + p.oscillationOffset) * 0.8;
         p.x += p.speedX + sway;
         p.y += p.speedY + extraSpeedY;
 
         drawLeaf(p);
 
-        // Reset particle if it leaves viewport
         if (p.y > height + 40 || p.x < -40 || p.x > width + 40) {
           particles[i] = createParticle(-20);
         }

@@ -5,10 +5,12 @@ import { OpeningGatesScreen } from './components/OpeningGatesScreen';
 import { HeroDovesSection } from './components/HeroDovesSection';
 import { QuranicAyahSection } from './components/QuranicAyahSection';
 import { CountdownSection } from './components/CountdownSection';
+import { SofitelVenueSection } from './components/SofitelVenueSection';
 import { RSVPSection } from './components/RSVPSection';
 import { FallingLeavesCanvas } from './components/FallingLeavesCanvas';
 import { AudioPlayer } from './components/AudioPlayer';
 import { AdminRSVPModal } from './components/AdminRSVPModal';
+import { FloralCornerSprig, FloralDivider } from './components/FloralOrnament';
 
 export default function App() {
   const [hasEntered, setHasEntered] = useState<boolean>(false);
@@ -19,19 +21,19 @@ export default function App() {
   };
 
   return (
-    <div className="relative min-h-screen text-[#2c1d0f] selection:bg-[#8a6514]/25 selection:text-[#2c1d0f] overflow-x-hidden font-serif-luxury">
-      {/* Background Wallpaper Fixed Across Entire Page */}
-      <div
-        className="fixed inset-0 w-full h-full pointer-events-none z-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: `url(${import.meta.env.BASE_URL === '/' ? '/bg.png' : import.meta.env.BASE_URL + 'bg.png'})`,
-        }}
-      />
+    <div className="relative min-h-screen text-[#202b26] selection:bg-[#b37874]/25 selection:text-[#202b26] overflow-x-hidden font-serif-luxury">
+      {/* Velvet Pink & Greyish Royal Green Atmospheric Floral Canvas */}
+      <div className="fixed inset-0 w-full h-full pointer-events-none z-0 sofitel-floral-backdrop" />
 
-      {/* Unified Gentle Luminous Layer (No harsh section barriers) */}
-      <div className="fixed inset-0 pointer-events-none -z-10 bg-[rgba(250,245,238,0.35)]" />
+      {/* Delicate Botanical Floral Corner Vignettes */}
+      <div className="fixed top-0 left-0 w-44 sm:w-64 h-44 sm:h-64 pointer-events-none z-[1] opacity-70 -scale-y-100">
+        <FloralCornerSprig className="w-full h-full" />
+      </div>
+      <div className="fixed bottom-0 right-0 w-44 sm:w-64 h-44 sm:h-64 pointer-events-none z-[1] opacity-70 -scale-x-100">
+        <FloralCornerSprig className="w-full h-full" />
+      </div>
 
-      {/* Background Falling Golden Leaves & Rose Petals */}
+      {/* Background Falling Velvet Rose Petals & Sage Leaves */}
       <FallingLeavesCanvas />
 
       {/* Floating Top Controls */}
@@ -40,14 +42,14 @@ export default function App() {
           onClick={() => setIsAdminOpen(true)}
           aria-label="Organizer Portal"
           title="Organizer Portal"
-          className="flex items-center justify-center w-9 h-9 rounded-full bg-white/85 hover:bg-white text-[#8a6514] border border-[#8a6514]/30 shadow-[0_4px_16px_rgba(138,101,20,0.15)] backdrop-blur-md transition-all duration-300 cursor-pointer"
+          className="flex items-center justify-center w-10 h-10 rounded-full bg-[#fdf9f7]/90 hover:bg-white text-[#32443c] border border-[#51665c]/30 shadow-[0_4px_16px_rgba(32,43,38,0.12)] backdrop-blur-md transition-all duration-200 cursor-pointer"
         >
           <Lock className="w-4 h-4" />
         </button>
         <AudioPlayer />
       </div>
 
-      {/* Opening Screen — Fullscreen Gates */}
+      {/* Opening Screen — Nile Drapes Intro Video */}
       <AnimatePresence>
         {!hasEntered && (
           <OpeningGatesScreen onEnterWebsite={handleEnterWebsite} />
@@ -62,23 +64,26 @@ export default function App() {
         id="main-wedding-experience"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 1.2, ease: 'easeInOut' }}
+        transition={{ duration: 1.0, ease: 'easeInOut' }}
         className="relative w-full flex flex-col items-center z-10 pb-12 bg-transparent"
       >
-        {/* 1. Hero Welcome */}
+        {/* 1. Hero Welcome with Sofitel Venue Video */}
         <HeroDovesSection />
 
         {/* 2. Holy Quranic Ayah */}
         <QuranicAyahSection />
 
         {/* 3. Live Countdown & Calendar Sync */}
-        <CountdownSection targetDate="2027-01-21T18:00:00" />
+        <CountdownSection targetDate="2027-01-07T18:00:00" />
 
-        {/* 4. Royal RSVP Form */}
+        {/* 4. Royal Venue Section — Sofitel & Google Maps */}
+        <SofitelVenueSection />
+
+        {/* 5. RSVP Form */}
         <RSVPSection />
 
-        {/* Footer with Transparent/Soft Blend */}
-        <footer className="w-full py-16 mt-16 flex flex-col items-center justify-center gap-6 text-center px-4 bg-transparent">
+        {/* Footer */}
+        <footer className="w-full py-16 mt-12 flex flex-col items-center justify-center gap-6 text-center px-4 bg-transparent">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -86,22 +91,22 @@ export default function App() {
             transition={{ duration: 0.9 }}
             className="flex flex-col items-center gap-3 max-w-xl mx-auto mb-2"
           >
-            <p className="font-arabic text-xl sm:text-2xl md:text-3xl text-[#6b4e18] font-bold leading-relaxed drop-shadow-sm">
+            <p className="font-arabic text-xl sm:text-2xl md:text-3xl text-[#32443c] font-bold leading-relaxed">
               بَارَكَ اللَّهُ لَكُمَا وَبَارَكَ عَلَيْكُمْ وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ
             </p>
-            <p className="font-serif-luxury italic text-xs sm:text-sm text-[#543b22]/90">
-              "May Allah bless you, shower His blessings upon you, and join you both in goodness and peace."
+            <p className="font-serif-luxury italic text-xs sm:text-sm text-[#42524a]">
+              &ldquo;May Allah bless you, shower His blessings upon you, and join you both in goodness and peace.&rdquo;
             </p>
           </motion.div>
 
-          <div className="flex items-center gap-3 text-[#8a6514]/60 w-48">
-            <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent to-[#8a6514]/40" />
-            <span className="text-[10px] tracking-widest uppercase font-royal">Ever After Invites</span>
-            <div className="h-[1px] flex-1 bg-gradient-to-l from-transparent to-[#8a6514]/40" />
-          </div>
+          <FloralDivider />
 
-          <p className="text-xs sm:text-sm text-[#543b22] font-serif tracking-wide">
-            Made with love by <span className="font-semibold text-[#2c1d0f]">Ever After Invites</span>
+          <span className="text-[11px] tracking-[0.28em] uppercase font-royal text-[#854d4a] font-semibold">
+            Ahmed &amp; Jana · 7 January 2027 · Sofitel Cairo
+          </span>
+
+          <p className="text-xs sm:text-sm text-[#42524a] font-serif tracking-wide">
+            Made with love by <span className="font-semibold text-[#202b26]">Ever After Invites</span>
           </p>
 
           <div className="flex items-center gap-6 text-xs font-royal tracking-widest uppercase mt-1">
@@ -109,25 +114,25 @@ export default function App() {
               href="https://www.instagram.com/_everafterinvites_/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#543b22] hover:text-[#8a6514] transition-colors"
+              className="text-[#32443c] hover:text-[#854d4a] transition-colors"
             >
               Instagram
             </a>
-            <span className="text-[#8a6514]/40">•</span>
+            <span className="text-[#51665c]/40" aria-hidden="true">·</span>
             <a
               href="https://www.tiktok.com/@_everafterinvites_"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#543b22] hover:text-[#8a6514] transition-colors"
+              className="text-[#32443c] hover:text-[#854d4a] transition-colors"
             >
               TikTok
             </a>
-            <span className="text-[#8a6514]/40">•</span>
+            <span className="text-[#51665c]/40" aria-hidden="true">·</span>
             <a
               href="https://www.facebook.com/profile.php?id=61591562833010"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#543b22] hover:text-[#8a6514] transition-colors"
+              className="text-[#32443c] hover:text-[#854d4a] transition-colors"
             >
               Facebook
             </a>

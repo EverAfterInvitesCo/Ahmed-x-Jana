@@ -9,12 +9,23 @@
     --font-pinyon: 'Pinyon Script', cursive;
     --font-arabic: 'Scheherazade New', 'Amiri', serif;
     --font-sans-clean: 'Plus Jakarta Sans', sans-serif;
+
+    /* Sofitel Venue Palette: Velvet Pink & Greyish Royal Green */
+    --color-canvas: #f8f3f0;
+    --color-surface: rgba(253, 249, 247, 0.84);
+    --color-royal-green: #32443c;
+    --color-royal-green-muted: #51665c;
+    --color-royal-green-deep: #202b26;
+    --color-velvet-pink: #b37874;
+    --color-velvet-pink-deep: #854d4a;
+    --color-velvet-pink-soft: #ead4d1;
+    --color-champagne: #a98754;
   }
 
   body {
     font-family: var(--font-serif-luxury);
-    background-color: #faf5ee;
-    color: #2c1d0f;
+    background-color: #f8f3f0;
+    color: #202b26;
     overflow-x: hidden;
   }
 }
@@ -47,47 +58,38 @@
   font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
-/* Luxurious Gold Text Gradient for Bright Canvas */
-.text-gold-deep {
-  color: #7a581a;
-}
-
-.text-gold-gradient {
-  background: linear-gradient(135deg, #573a0e 0%, #8a6514 40%, #b38b37 70%, #573a0e 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* Royal Glass for Bright Floral Canvas */
-.royal-glass-bright {
-  background: rgba(255, 255, 255, 0.55);
+/* Velvet Pink & Greyish Royal Green Surfaces */
+.sofitel-surface {
+  background: rgba(253, 249, 247, 0.86);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(138, 101, 20, 0.22);
-  box-shadow: 0 10px 30px rgba(110, 80, 20, 0.08);
+  border: 1px solid rgba(81, 102, 92, 0.22);
+  box-shadow: 0 12px 34px rgba(32, 43, 38, 0.07);
 }
 
-.royal-glass-soft {
-  background: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(138, 101, 20, 0.15);
+.sofitel-floral-backdrop {
+  background-color: #f8f3f0;
+  background-image:
+    radial-gradient(at 15% 18%, rgba(212, 165, 161, 0.28) 0px, transparent 52%),
+    radial-gradient(at 85% 22%, rgba(81, 102, 92, 0.16) 0px, transparent 50%),
+    radial-gradient(at 80% 75%, rgba(212, 165, 161, 0.24) 0px, transparent 55%),
+    radial-gradient(at 18% 82%, rgba(81, 102, 92, 0.15) 0px, transparent 52%),
+    linear-gradient(180deg, #f9f4f1 0%, #f3eae6 50%, #eff1ee 100%);
 }
 
-/* Custom Scrollbar in Warm Ivory/Gold */
+/* Custom Scrollbar in Velvet Pink & Sage */
 ::-webkit-scrollbar {
   width: 7px;
 }
 ::-webkit-scrollbar-track {
-  background: #faf5ee;
+  background: #f8f3f0;
 }
 ::-webkit-scrollbar-thumb {
-  background: #cbb48b;
+  background: #b99794;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #9d7c43;
+  background: #51665c;
 }
 
 @media (prefers-reduced-motion: reduce) {
