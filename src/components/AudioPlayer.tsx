@@ -5,23 +5,67 @@ import { MEDIA_ASSETS } from '../utils/media';
 export const AudioPlayer: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const userMutedRef = useRef<boolean>(false);
 
   useEffect(() => {
     const audio = new Audio(MEDIA_ASSETS.audioTrack);
     audio.loop = true;
     audio.volume = 0.4;
+    audio.preload = 'auto';
     audioRef.current = audio;
 
-    const handleSiteEntered = () => {
-      audio.play()
-        .then(() => setIsPlaying(true))
-        .catch((err) => console.log('Audio playback prevented by browser policy:', err));
+    const tryPlay = () => {
+      if (userMutedRef.current || !audio.paused) return;
+      audio
+        .play()
+        .then(() => {
+          setIsPlaying(true);
+        })
+        .catch(() => {
+          // Browser blocked unmuted autoplay before first user interaction
+        });
     };
 
+    tryPlay();
+
+    const handleSiteEntered = () => {
+      tryPlay();
+    };
+
+    const handleFirstInteraction = () => {
+      if (!userMutedRef.current && audio.paused) {
+        tryPlay();
+      }
+      if (!audio.paused) {
+        window.removeEventListener('pointerdown', handleFirstInteraction);
+        window.removeEventListener('touchstart', handleFirstInteraction);
+        window.removeEventListener('keydown', handleFirstInteraction);
+      }
+    };
+
+    const handlePause = () => {
+      if (audio.ended) return;
+      setIsPlaying(false);
+    };
+
+    const handlePlay = () => {
+      setIsPlaying(true);
+    };
+
+    audio.addEventListener('play', handlePlay);
+    audio.addEventListener('pause', handlePause);
     window.addEventListener('wedding-site-entered', handleSiteEntered);
+    window.addEventListener('pointerdown', handleFirstInteraction, { passive: true });
+    window.addEventListener('touchstart', handleFirstInteraction, { passive: true });
+    window.addEventListener('keydown', handleFirstInteraction);
 
     return () => {
+      audio.removeEventListener('play', handlePlay);
+      audio.removeEventListener('pause', handlePause);
       window.removeEventListener('wedding-site-entered', handleSiteEntered);
+      window.removeEventListener('pointerdown', handleFirstInteraction);
+      window.removeEventListener('touchstart', handleFirstInteraction);
+      window.removeEventListener('keydown', handleFirstInteraction);
       audio.pause();
     };
   }, []);
@@ -31,10 +75,13 @@ export const AudioPlayer: React.FC = () => {
     if (!audio) return;
 
     if (isPlaying) {
+      userMutedRef.current = true;
       audio.pause();
       setIsPlaying(false);
     } else {
-      audio.play()
+      userMutedRef.current = false;
+      audio
+        .play()
         .then(() => setIsPlaying(true))
         .catch((err) => console.log('Playback error:', err));
     }

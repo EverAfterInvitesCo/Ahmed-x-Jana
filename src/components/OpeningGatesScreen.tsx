@@ -14,10 +14,19 @@ export const OpeningGatesScreen: React.FC<OpeningGatesScreenProps> = ({ onEnterW
     if (!video) return;
 
     video.currentTime = 0;
-    video.play().catch(() => {
-      // Fallback: if browser restricts autoplay (e.g. Low Power Mode), user tap will start playback
-    });
+    video
+      .play()
+      .then(() => {
+        window.dispatchEvent(new CustomEvent('wedding-site-entered'));
+      })
+      .catch(() => {
+        // Fallback: if browser restricts autoplay, user tap will start playback
+      });
   }, []);
+
+  const handleVideoPlay = () => {
+    window.dispatchEvent(new CustomEvent('wedding-site-entered'));
+  };
 
   const handleTap = () => {
     const video = videoRef.current;
@@ -47,6 +56,7 @@ export const OpeningGatesScreen: React.FC<OpeningGatesScreenProps> = ({ onEnterW
         muted
         playsInline
         preload="auto"
+        onPlay={handleVideoPlay}
         onEnded={handleVideoEnded}
         className="w-full h-full object-cover pointer-events-none"
         src={MEDIA_ASSETS.introVideo}
