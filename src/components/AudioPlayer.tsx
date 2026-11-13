@@ -13,7 +13,7 @@ export const AudioPlayer: React.FC = () => {
 
     audio.volume = 0.4;
 
-    const tryPlay = () => {
+    const handleSiteEntered = () => {
       if (userMutedRef.current || !audio.paused) return;
       audio
         .play()
@@ -21,30 +21,8 @@ export const AudioPlayer: React.FC = () => {
           setIsPlaying(true);
         })
         .catch(() => {
-          // Browsers block unmuted audio autoplay prior to a user gesture
+          // Ignore if browser still restricts playback
         });
-    };
-
-    tryPlay();
-
-    const handleCanPlay = () => {
-      tryPlay();
-    };
-
-    const handleSiteEntered = () => {
-      tryPlay();
-    };
-
-    const handleFirstGesture = () => {
-      if (!userMutedRef.current && audio.paused) {
-        tryPlay();
-      }
-      if (!audio.paused) {
-        window.removeEventListener('click', handleFirstGesture, true);
-        window.removeEventListener('touchend', handleFirstGesture, true);
-        window.removeEventListener('pointerdown', handleFirstGesture, true);
-        window.removeEventListener('keydown', handleFirstGesture, true);
-      }
     };
 
     const handlePause = () => {
@@ -56,24 +34,14 @@ export const AudioPlayer: React.FC = () => {
       setIsPlaying(true);
     };
 
-    audio.addEventListener('canplay', handleCanPlay);
     audio.addEventListener('play', handlePlay);
     audio.addEventListener('pause', handlePause);
     window.addEventListener('wedding-site-entered', handleSiteEntered);
-    window.addEventListener('click', handleFirstGesture, { capture: true, passive: true });
-    window.addEventListener('touchend', handleFirstGesture, { capture: true, passive: true });
-    window.addEventListener('pointerdown', handleFirstGesture, { capture: true, passive: true });
-    window.addEventListener('keydown', handleFirstGesture, { capture: true });
 
     return () => {
-      audio.removeEventListener('canplay', handleCanPlay);
       audio.removeEventListener('play', handlePlay);
       audio.removeEventListener('pause', handlePause);
       window.removeEventListener('wedding-site-entered', handleSiteEntered);
-      window.removeEventListener('click', handleFirstGesture, true);
-      window.removeEventListener('touchend', handleFirstGesture, true);
-      window.removeEventListener('pointerdown', handleFirstGesture, true);
-      window.removeEventListener('keydown', handleFirstGesture, true);
       audio.pause();
     };
   }, []);
@@ -100,7 +68,6 @@ export const AudioPlayer: React.FC = () => {
       <audio
         ref={audioRef}
         src={MEDIA_ASSETS.audioTrack}
-        autoPlay
         loop
         preload="auto"
         playsInline
